@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto Brejal</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="carrossel.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="#" class="logo">
+            <img src="./img/logo.png" alt="Projeto Brejal">
+        </a>
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#social">Redes Sociais</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="sobre">
+        <h1>Sobre Nós</h1>
+        <p>O Projeto Brejal é uma iniciativa social focada em transformar vidas e comunidades por meio de ações educacionais, culturais e sociais.
+        </p>
+      </section>
+      <section id="projetos">
+        <h1>Nossos Projetos</h1>
+        <p>Conheça os projetos que estamos desenvolvendo para fazer a diferença em nossa sociedade.
+        </p>
+        <div class="carrossel">
+            <button class="prev" onclick="mudarImagem(-1)">&#10094;</button>
+            <div class="imagens">
+              <img src="img/images (1).jpg" alt="Imagem 1" class="imagem" />
+              <img src="img/dsd.jpg" alt="Imagem 2" class="imagem" />
+              <img src="img/imagem3.jpg" alt="Imagem 3" class="imagem" />
+              <!-- Adicione quantas imagens desejar -->
+            </div>
+            <button class="next" onclick="mudarImagem(1)">&#10095;</button>
+          </div>
+      </section>
+      <section id="social">
+        <h1>Nos Acompanhe</h1>
+        <p>Siga-nos nas redes sociais para ficar por dentro das novidades do Projeto Brejal.
+        </p>
+        <div class="social">
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              class="social-icon"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <!-- WhatsApp -->
+            <a
+              href="https://wa.me/5500000000000"
+              target="_blank"
+              class="social-icon"
+            >
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <!-- Facebook -->
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              class="social-icon"
+            >
+              <i class="fab fa-facebook"></i>
+            </a>
+            <!-- YouTube -->
+            <a
+              href="https://www.youtube.com"
+              target="_blank"
+              class="social-icon"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+            <!-- LinkedIn -->
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              class="social-icon"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <!-- TikTok -->
+            <a
+              href="https://www.tiktok.com"
+              target="_blank"
+              class="social-icon"
+            >
+              <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+      </section>
+    </main>
+    <footer>
+        <div class="content">
+            <nav>
+                <a href="#">Sobre</a>
+                <a href="#">Projetos</a>
+                <a href="#">Redes Sociais</a>
+            </nav>
+            <a href="#" class="logo">
+                <img src="./img/logo.png" alt="Projeto Brejal">
+            </a>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Projeto Brejal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Scripts para o carrossel -->
+    <script>
+        let indiceImagem = 0;
+        let startX = 0;
+        let endX = 0;
+
+        function mudarImagem(direcao) {
+          const imagens = document.querySelectorAll(".imagem");
+          const totalImagens = imagens.length;
+
+          indiceImagem += direcao;
+
+          if (indiceImagem >= totalImagens) {
+            indiceImagem = 0;
+          }
+
+          if (indiceImagem < 0) {
+            indiceImagem = totalImagens - 1;
+          }
+
+          document.querySelector(".imagens").style.transform = `translateX(-${
+            indiceImagem * 100
+          }%)`;
+        }
+
+        // Adiciona eventos de toque para dispositivos touchscreen
+        const carrossel = document.querySelector(".carrossel");
+
+        carrossel.addEventListener("touchstart", (e) => {
+          startX = e.touches[0].clientX;
+        });
+
+        carrossel.addEventListener("touchend", (e) => {
+          endX = e.changedTouches[0].clientX;
+          handleGesture();
+        });
+
+        function handleGesture() {
+          if (startX - endX > 50) {
+            mudarImagem(1); // Deslizar para a esquerda
+          }
+
+          if (endX - startX > 50) {
+            mudarImagem(-1); // Deslizar para a direita
+          }
+        }
+    </script>
+  </body>
+</html>
